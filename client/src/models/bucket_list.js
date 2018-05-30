@@ -25,9 +25,9 @@ BucketList.prototype.getData = function () {
   .catch(console.error);
 };
 
-BucketList.prototype.postNewCountry = function (name) {
+BucketList.prototype.postNewCountry = function (country) {
   const request = new Request(this.url);
-  request.post({name})
+  request.post({country})
   .then((countrys)=>{
     PubSub.publish('BucketList:data-loaded',countrys);
   }).catch(console.error);
@@ -35,7 +35,7 @@ BucketList.prototype.postNewCountry = function (name) {
 
 BucketList.prototype.deleteCountryListener = function(){
   PubSub.subscribe('DetailView:country-delete',(evt)=>{
-    console.log("This gonna work!")
+    // console.log("This gonna work!")
     const request = new Request(this.url);
     request.delete(evt.detail).then((countrys)=>{
       PubSub.publish('BucketList:data-loaded', countrys);

@@ -5,19 +5,22 @@ this.listView = listView;
 }
 
 
-DetailView.prototype.createCountryDetailView = function (country) {
-  const countryName = document.createElement('h3');
-  countryName.textContent = country.name;
+DetailView.prototype.createCountryDetailView = function (details) {
+  // console.log(country)
+  const countryName = document.createElement('h2');
+  countryName.textContent = details.country.name;
   this.listView.appendChild(countryName);
 
-  // const countryID = document.createElement('p');
-  // countryID.textContent = country.id;
-  // countryName.appendChild(countryID);
-  // console.log("Original ID:",country._id);
+  const countryPopulation = document.createElement('p');
+  countryPopulation.textContent = `Population: ${details.country.population}`;
+  countryName.appendChild(countryPopulation);
 
   const deleteButton = document.createElement('button');
   deleteButton.textContent = "💀";
-  this.deleteCountry(deleteButton,country._id);
+  this.deleteCountry(deleteButton,details._id);
+
+  const myLine = document.createElement('hr');
+  this.listView.appendChild(myLine);
 
   countryName.appendChild(deleteButton);
 
